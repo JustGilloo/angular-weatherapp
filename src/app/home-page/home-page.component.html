@@ -1,0 +1,51 @@
+<div class="container-fluid text-center" id="homesection">
+    <div class="row min-vh-100 justify-content-center align-content-center">
+        <div class="col-12">
+            <h1>Weather Forecast</h1>
+            <h4>An Angular and API practice project displaying a 7-day weather forecast based on your
+                geolocation using the OpenMeteo and OpenStreetMap API</h4>
+            <p class="py-1">Pressing the button loads in the forecast for your location</p>
+            <p><i>If you decline geolocation permission, it will default to Uccle - Brussels</i></p>
+            <button class="btn btn-primary" (click)="fetchForecastWithCoords()">Load Forecast</button>
+            <div class="row py-5">
+                @for (day of weather.daily.time; track day; let index = $index) {
+                @if (index != 0) {
+                <div class="col-12 col-lg-2 col-md-12 col-sm-12 py-2">
+                    <div class="card" id="cardsection">
+                        <div class="card-body">
+                            <p class="card-title"><b>{{getWeekdayFromString(day.toString())}}</b></p>
+                            @for (icon of weatherConditions; track icon;) {
+                            @if (icon.code === weather.daily.weather_code[index]) {
+                            <img class="card-text" [src]="'../../assets/icons/' + icon.image" alt="weathericon">
+                            }
+                            }
+                            <p class="card-text">Min: {{weather.daily.temperature_2m_min[index]}}
+                                {{weather.current_units.temperature_2m}}
+                            </p>
+                            <p class="card-text">Max: {{weather.daily.temperature_2m_max[index]}}
+                                {{weather.current_units.temperature_2m}}</p>
+                        </div>
+                    </div>
+                </div>
+                } @else {
+                <div class="container col-12 py-2">
+                    <div class="card" id="cardsection">
+                        <div class="card-body">
+                            <h1>{{userLocation}}</h1>
+                            <h4>{{getWeekdayFromString(weather.daily.time.toString())}}
+                                {{getFullDateFromString(weather.daily.time.toString())}}</h4>
+                            @for (icon of weatherConditions; track icon;) {
+                            @if (icon.code === weather.daily.weather_code[index]) {
+                            <img [src]="'../../assets/icons/' + icon.image" alt="weathericon">
+                            }
+                            }
+                            <p>Current: {{weather.current.temperature_2m}} {{weather.current_units.temperature_2m}}</p>
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>

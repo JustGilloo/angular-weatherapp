@@ -1,0 +1,11 @@
+#homesection {
+    background-image: url(https://static.vecteezy.com/system/resources/previews/001/849/560/non_2x/clear-blue-sky-background-free-vector.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#cardsection {
+    background-color: rgb(248, 245, 245);
+    border: solid 2px rgb(86, 184, 223);
+}
